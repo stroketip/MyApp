@@ -29,6 +29,7 @@
             const remote = electron.remote;
             const Menu = remote.Menu;
             const MenuItem = remote.MenuItem;
+            const shell = remote.shell;
 
             let color = localStorage.getItem('color') ? localStorage.getItem('color') : 'skyblue';
             setBackgroundColor(color);
@@ -70,6 +71,16 @@
         ipcRenderer.on('set_bgcolor', function(event, color) {
             setBackgroundColor(color);
         });
+
+        setTimeout(function(){
+            let notification = new Notification(
+            'Quote!',
+            { body: 'Visit our website!'}
+        );
+            notification.onclick = function() {
+                shell.openExternal('http://dotinstall.com');
+            }
+        }, 3000);
 
         </script>
     </body>
